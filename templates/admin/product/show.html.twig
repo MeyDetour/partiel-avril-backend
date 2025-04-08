@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <div class="oneThings">
+        <h1>Product</h1>
+        <div class="rowAction">
+
+            <a href="{{ path('app_product_edit', {'id': product.id}) }}">Edit</a>
+
+            {{ include('admin/product/_delete_form.html.twig') }}
+        </div>
+        <div class="rowContent">
+            <div>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th style="padding: 20px">Id</th>
+                        <td>{{ product.id }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 20px">Name</th>
+                        <td>{{ product.name }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 20px">Price</th>
+                        <td>{{ product.price }}</td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div>
+                {% if product.image is not null %}
+                    <div>
+                        <span>Image</span>
+                        <img src="{{ vich_uploader_asset(product.image, 'imageFile') }}" alt="{{ product.name }}">
+                    </div>
+                {% endif %}
+
+                {% if product.qrCodeImage is not null %}
+                    <div>
+                        <span>QR Code</span>
+                        <img src="{{ vich_uploader_asset(product.QrCodeImage, 'imageFile') }}" alt="{{ product.name }}">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
