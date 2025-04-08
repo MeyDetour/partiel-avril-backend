@@ -3,5 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
 api_login_check:
     path: /api/login_check
+    controller: lexik_jwt_authentication.controller:checkCredentialsAction
