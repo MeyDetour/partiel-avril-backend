@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    {% for user in users %}
+        {% if user.id != app.user.id %}
+            <div>
+                <span>{{ user.email }}</span>
+                {% if "ROLE_ADMIN" not in user.roles %}
+                    <form action="{{ path("grant_user_to_admin",{"id":user.id }) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                        <button>Grant admin</button>
+                    </form>
+                {% else %}
+                    <form action="{{ path("revoke_user_to_admin",{"id":user.id }) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                        <button>Revoke admin acces</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    <span>You're the only user</span>
+    {% if users|length == 1 %}
+    {% endif %}
+{% endblock %}
