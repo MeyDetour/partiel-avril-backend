@@ -1,0 +1,23 @@
+<nav>
+    <ul>
+
+        <li><a href="{{ path("app_doc") }}">Doc</a></li>
+
+        {% if app.user and  "ROLE_ADMIN" in app.user.roles %}
+            <li><a href="{{ path("admin_users") }}">Users</a></li>
+
+            <li><a href="{{ path("app_product_index") }}">Products</a></li>
+            <li><a href="{{ path("app_orders_index") }}">Orders</a></li>
+        {% endif %}
+    </ul>
+    <ul>
+        {% if app.user %}
+            <li><a href="{{ path("app_logout") }}">Logout</a></li>
+        {% else %}
+            <li>
+                <a href="{{ path("app_register") }}">Register</a>
+            </li>
+            <li><a href="{{ path("app_login") }}">Login</a></li>
+        {% endif %}
+    </ul>
+</nav>
