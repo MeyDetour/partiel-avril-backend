@@ -1,0 +1,90 @@
+.oneThings {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+
+}
+
+.oneThings .rowAction, .oneThings .rowContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.oneThings .rowAction {
+    width: 25%;
+    background: #ffdcfc36;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    justify-content: space-around;
+}
+.oneThings .rowAction a{
+    text-decoration: none;
+    color: black;
+
+}
+.oneThings .rowContent{
+
+    justify-content: center;
+    gap: 150px;
+    width: 100%;
+}
+
+/* metada */
+.oneThings .rowContent> div:first-child {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.oneThings .rowContent> div:first-child >table{
+
+    height: fit-content;
+    text-align: justify;
+}
+/* image and qrcode */
+.oneThings .rowContent> div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 50%;
+    gap: 20px;
+}
+
+.oneThings .rowContent> div:last-child img {
+    width: 250px;
+    object-fit: contain;
+}
+
+.oneThings .rowContent> div:last-child > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.pageOrder{
+
+}
+.pageOrder .product{
+    display: flex; flex-direction: column;
+    align-items: center;
+}
+
+
+.pageOrder .product > div{
+    display: flex;flex-direction: row;
+}
+.pageOrder .product > div > div{
+    display: flex;flex-direction: column;
+    align-items: center;
+}
+.pageOrder .product > div > div > img{
+    width: 100px !important;
+}
