@@ -116,6 +116,7 @@ final class ProductController extends AbstractController
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->getPayload()->getString('_token'))) {
+         unlink(    $this->getParameter('kernel.project_dir') . '/public/images/qrcodes/' .$product->getQrCodeImage()->getImageName());
             $entityManager->remove($product);
             $entityManager->flush();
         }
