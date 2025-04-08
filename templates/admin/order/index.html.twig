@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OrderController!{% endblock %}
+
+{% block body %} <h1>Order index</h1>
+
+    <table class="table" width="100%">
+        <thead width="100%" style="text-align: end">
+        <tr>
+            <th>Id</th>
+            <th>Author</th>
+            <th>Total</th>
+            <th>articles</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody style="text-align: end">
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.owner.email }}</td>
+                <td>{{ countService.countTotalPrice(order.products) }}€</td>
+                <td>
+                    {% for product in order.products %}
+                        <a href="{{ path('app_product_show', {'id': product.id}) }}">{{ product.name }} (id
+                            : {{ product.id }})</a>
+
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('app_order', {'id': order.id}) }}">show</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button><a href="{{ path('app_product_new') }}">Create new</a></button>
+
+{% endblock %}
