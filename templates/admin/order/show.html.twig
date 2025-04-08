@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <div class="oneThings pageOrder">
+        <h1>Order #{{ order.id }}</h1>
+
+        <div class="rowContent">
+            <div>
+                <table class="table">
+                    <tbody>
+                    <tr >
+                        <th style="padding: 20px">Id</th>
+                        <td>{{ order.id }}</td>
+                    </tr>
+
+                    <tr >
+                        <th style="padding: 20px">Author</th>
+                        <td>{{ order.owner.email }} - {{ order.owner.id }}</td>
+                    </tr>
+                    <tr   >
+                        <th style="padding: 20px">Total</th>
+                        <td>{{ countService.countTotalPrice(order.products) }}€</td>
+                    </tr>
+                    <tr   >
+                        <th style="padding: 20px">Articles</th>
+                        <td>{{ order.products|length }}</td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div>
+                {% for product in order.products %}
+                    <div class="product">
+                        <span>#{{ product.id }} - {{ product.name }}</span>
+                        <div>
+                            {% if product.image is not null %}
+                                <img src="{{ vich_uploader_asset(product.image, 'imageFile') }}"
+                                     alt="{{ product.name }}">
+
+                            {% endif %}
+
+                            {% if product.qrCodeImage is not null %}
+
+                                <img src="{{ vich_uploader_asset(product.QrCodeImage, 'imageFile') }}"
+                                     alt="{{ product.name }}">
+
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                {% endfor %}   {% for product in order.products %}
+                    <div class="product">
+                        <span>#{{ product.id }} - {{ product.name }}</span>
+                        <div>
+                            {% if product.image is not null %}
+                                <img src="{{ vich_uploader_asset(product.image, 'imageFile') }}"
+                                     alt="{{ product.name }}">
+
+                            {% endif %}
+
+                            {% if product.qrCodeImage is not null %}
+
+                                <img src="{{ vich_uploader_asset(product.QrCodeImage, 'imageFile') }}"
+                                     alt="{{ product.name }}">
+
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
