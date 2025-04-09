@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Security\EmailVerifier;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,10 +46,11 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/api/register', name: 'app_api_register')]
-    public function apRegister(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
+    public function apRegister(Request $request, UserPasswordHasherInterface $userPasswordHasher,UserRepository $userRepository ,Security $security, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {
         $user = $serializer->deserialize($request->getContent(), User::class, "json");
 
+     if(   $userRepository->findBy(["email"=>$user->getEmail()]))return $this->json(["message"=>"Email already taken",409]);
 
         /** @var string $plainPassword */
         $plainPassword = $user->getPassword();
