@@ -10,20 +10,20 @@
             <div>
                 <table class="table">
                     <tbody>
-                    <tr >
+                    <tr>
                         <th style="padding: 20px">Id</th>
                         <td>{{ order.id }}</td>
                     </tr>
 
-                    <tr >
+                    <tr>
                         <th style="padding: 20px">Author</th>
                         <td>{{ order.owner.email }} - {{ order.owner.id }}</td>
                     </tr>
-                    <tr   >
+                    <tr>
                         <th style="padding: 20px">Total</th>
                         <td>{{ countService.countTotalPrice(order.products) }}€</td>
                     </tr>
-                    <tr   >
+                    <tr>
                         <th style="padding: 20px">Articles</th>
                         <td>{{ order.products|length }}</td>
                     </tr>
