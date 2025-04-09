@@ -29,10 +29,11 @@ class Product
     #[Groups(["products",'order'])]
     private ?float $price = null;
 
-    #[Groups(["products"])]
+    #[Groups(["products",'order'])]
     #[ORM\Column(nullable: true)]
     private ?string $imageUrl = null;
-    #[Groups(["products"])]
+
+    #[Groups(["products",'order'])]
     #[ORM\Column(nullable: true)]
     private ?string $qrCodeUrl = null;
 
