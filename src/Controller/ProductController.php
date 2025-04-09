@@ -135,8 +135,10 @@ final class ProductController extends AbstractController
         if (!$product->getQrCodeImage()){
             return  $this->redirectToRoute("app_product_show",["id"=>$product->getId()]);
         }
+        $html = "<html><body style='margin:0'><img src='" . $product->getQrCodeUrl() . "' style='width:100%;height:auto'/></body></html>";
+
         return new PdfResponse(
-            $knpSnappyPdf->getOutput($product->getQrCodeUrl()),
+            $knpSnappyPdf->getOutput($html),
             'file.pdf'
         );
     }
