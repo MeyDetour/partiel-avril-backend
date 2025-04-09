@@ -23,10 +23,7 @@
                         <th style="padding: 20px">Total</th>
                         <td>{{ countService.countTotalPrice(order.productsItems) }}€</td>
                     </tr>
-                    <tr>
-                        <th style="padding: 20px">Articles</th>
-                        <td>{{ order.products|length }}</td>
-                    </tr>
+
                     <tr>
                         <th style="padding: 20px">Articles</th>
                         <td>{{ countService.countArticleNumber(order.productsItems) }}€</td>
