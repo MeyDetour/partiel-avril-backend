@@ -138,7 +138,7 @@ final class ProductController extends AbstractController
         $html = "<html><body style='margin:0'><img src='" . $product->getQrCodeUrl() . "' style='width:100%;height:auto'/></body></html>";
 
         return new PdfResponse(
-            $knpSnappyPdf->getOutput($html),
+            $knpSnappyPdf->generateFromHtml($html),
             'file.pdf'
         );
     }
