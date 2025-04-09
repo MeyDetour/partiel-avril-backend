@@ -5,7 +5,7 @@
 {% block body %}
     {% for user in users %}
         {% if user.id != app.user.id %}
-            <div>
+            <div style="margin-bottom: 50px">
                 <span>{{ user.email }}</span>
                 {% if "ROLE_ADMIN" not in user.roles %}
                     <form action="{{ path("grant_user_to_admin",{"id":user.id }) }}">
@@ -21,7 +21,9 @@
             </div>
         {% endif %}
     {% endfor %}
-    <span>You're the only user</span>
+
     {% if users|length == 1 %}
+
+        <span>You're the only user</span>
     {% endif %}
 {% endblock %}
