@@ -8,6 +8,7 @@
         <div class="rowAction">
 
             <a href="{{ path('app_product_edit', {'id': product.id}) }}">Edit</a>
+            <a href="{{ path('app_upload_qrcode', {'id': product.qrCodeImage}) }}">Télécharger le QR CODE</a>
 
             {{ include('admin/product/_delete_form.html.twig') }}
         </div>

@@ -12,6 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
@@ -126,5 +128,16 @@ final class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/{id}/uploadqrcode', name: 'app_upload_qrcode', methods: ['GET'])]
+    public function upload(Product $product, Pdf $knpSnappyPdf): \Symfony\Component\HttpFoundation\RedirectResponse | PdfResponse
+    {
+        if (!$product->getQrCodeImage()){
+            return  $this->redirectToRoute("app_product_show",["id"=>$product->getId()]);
+        }
+        return new PdfResponse(
+            $knpSnappyPdf->getOutput($product->getQrCodeUrl()),
+            'file.pdf'
+        );
     }
 }
