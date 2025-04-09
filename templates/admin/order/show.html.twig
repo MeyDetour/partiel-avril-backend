@@ -40,26 +40,7 @@
                 {% for item in order.productsItems %}
                     <div class="product">
                         <span>#{{ item.product.id }} - {{ item.product.name }}</span>
-                        <div>
-                            {% if item.product.image is not null %}
-                                <img src="{{ vich_uploader_asset(item.product.image, 'imageFile') }}"
-                                     alt="{{ item.product.name }}">
-
-                            {% endif %}
-
-                            {% if item.product.qrCodeImage is not null %}
-
-                                <img src="{{ vich_uploader_asset(item.product.QrCodeImage, 'imageFile') }}"
-                                     alt="{{ item.product.name }}">
-
-                            {% endif %}
-                        </div>
-
-                    </div>
-
-                {% endfor %}   {% for item in order.productsItems %}
-                    <div class="product">
-                        <span>#{{ item.product.id }} - {{ item.product.name }}</span>
+                        <span>Quantity - {{ item.quantity }}</span>
                         <div>
                             {% if item.product.image is not null %}
                                 <img src="{{ vich_uploader_asset(item.product.image, 'imageFile') }}"
