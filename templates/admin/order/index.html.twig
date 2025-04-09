@@ -29,7 +29,9 @@
                 </td>
                 <td>
                     <a href="{{ path('app_order', {'id': order.id}) }}">show</a>
-                    <a href="{{ path('delete_order', {'id': order.id}) }}">delete</a>
+                    <form action="{{ path('delete_order', {'id': order.id}) }}" method="post">
+                        <button type="submit">delete</button>
+                    </form>
                 </td>
             </tr>
         {% endfor %}

@@ -28,7 +28,7 @@ final class OrderController extends AbstractController
     }
 
     //USED ONLY FOR DEBUG
-    #[Route('/delete/{id}', name: 'delete_order', methods: "DELETE")]
+    #[Route('/delete/{id}', name: 'delete_order', methods: "POST")]
     public function delete(Order $order, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($order);
