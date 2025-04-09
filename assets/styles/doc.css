@@ -1,0 +1,157 @@
+.documentation{
+
+    display: flex
+;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 5vh;
+}
+/*=========== Types ===============*/
+
+.greenType {
+    background: #00800030;
+    border: 1px solid green;
+    color: green;
+}
+
+.redType {
+    background: #ff000030;
+    border: 1px solid red;
+    color: red;
+}
+
+.blueType {
+    background: rgba(0, 0, 255, 0.19);
+    border: 1px solid blue;
+    color: blue;
+}
+
+.grayType {
+    background: rgba(128, 128, 128, 0.19);
+    border: 1px solid grey;
+    color: grey;
+}
+
+/*===============COLOR CLASS=============*/
+.intColor, .booleanColor, .datetimeColor, .stringColor, .urlColor, .labelColor {
+    font-weight: 800;
+}
+
+.intColor {
+    color: #8181ff;
+}
+
+.booleanColor {
+    color: #ff8181;
+}
+
+.stringColor {
+    color: #399d00;
+}
+
+.urlColor {
+    color: #a2ff6b;
+}
+
+.notnullColor {
+    color: #8b8b8b;
+}
+
+.labelColor {
+    color: #95d7f9;
+}
+
+.datetimeColor {
+    color: #a818cf;
+}
+
+[class^="docBox"] {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    width: 100%;
+
+}
+
+[class^="docBox"] pre {
+    position: relative;
+    border: 1px solid #dfdfdf;
+    background: #f1f1f1;
+    border-radius: 10px;
+    padding: 40px 24px;
+
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+[class^="docBox"] pre .json {
+
+    position: absolute;
+    top: 8%;
+    right: 2%;
+    color: grey;
+}
+
+[class^="docBox"] pre .json-content {
+    font-size: 15px;
+}
+
+[class^="docBox"] {
+    display: flex;
+    flex-direction: column;
+    width: 43%;
+
+    border: 1px solid #8080804d;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 13px;
+    margin-bottom: 80px;
+}
+
+
+[class^="docBox"] > .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+[class^="docBox"] .type {
+    width: fit-content;
+
+    padding: 5px 12px;
+    border-radius: 7px;
+}
+
+@media screen and (max-width: 850px) {
+
+    [class^="routeSection2"] {
+        width: 100%;
+    }
+    [class^="docBox"] pre {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+
+    [class^="routeSection2"] {
+        width: 100%;
+    }
+
+}
+
+
+
+
+@media screen and (max-width: 400px) {
+
+    [class^="docBox"] pre {
+        font-size: 12px;
+    }
+}
