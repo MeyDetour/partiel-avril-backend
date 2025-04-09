@@ -19,11 +19,11 @@
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.owner.email }}</td>
-                <td>{{ countService.countTotalPrice(order.products) }}€</td>
+                <td>{{ countService.countTotalPrice(order.productsItems) }}€</td>
                 <td>
-                    {% for product in order.products %}
-                        <a href="{{ path('app_product_show', {'id': product.id}) }}">{{ product.name }} (id
-                            : {{ product.id }})</a>
+                    {% for item in order.productsItems %}
+                        <a href="{{ path('app_product_show', {'id': item.product.id}) }}">{{ item.product.name }} (id
+                            : {{ item.product.id }} , qt : {{ item.quantity }})</a>
 
                     {% endfor %}
                 </td>

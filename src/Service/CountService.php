@@ -4,11 +4,20 @@ namespace App\Service;
 
 class CountService
 {
-public function countTotalPrice($products){
-    $count = 0;
-    foreach($products as $product){
-        $count += $product->getPrice();
+    public function countTotalPrice($productsitem)
+    {
+        $count = 0;
+        foreach ($productsitem as $item) {
+            $count += $item->getProduct()->getPrice() * $item->getQuantity();
+        }
+        return $count;
     }
-    return $count;
-}
+    public function countArticleNumber($productsitem)
+    {
+        $count = 0;
+        foreach ($productsitem as $item) {
+            $count +=  $item->getQuantity();
+        }
+        return $count;
+    }
 }

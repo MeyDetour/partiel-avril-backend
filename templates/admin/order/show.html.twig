@@ -21,11 +21,16 @@
                     </tr>
                     <tr>
                         <th style="padding: 20px">Total</th>
-                        <td>{{ countService.countTotalPrice(order.products) }}€</td>
+                        <td>{{ countService.countTotalPrice(order.productsItems) }}€</td>
                     </tr>
                     <tr>
                         <th style="padding: 20px">Articles</th>
                         <td>{{ order.products|length }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 20px">Articles</th>
+                        <td>{{ countService.countArticleNumber(order.productsItems) }}€</td>
+
                     </tr>
 
 
@@ -35,40 +40,40 @@
 
 
             <div>
-                {% for product in order.products %}
+                {% for item in order.productsItems %}
                     <div class="product">
-                        <span>#{{ product.id }} - {{ product.name }}</span>
+                        <span>#{{ item.product.id }} - {{ item.product.name }}</span>
                         <div>
-                            {% if product.image is not null %}
-                                <img src="{{ vich_uploader_asset(product.image, 'imageFile') }}"
-                                     alt="{{ product.name }}">
+                            {% if item.product.image is not null %}
+                                <img src="{{ vich_uploader_asset(item.product.image, 'imageFile') }}"
+                                     alt="{{ item.product.name }}">
 
                             {% endif %}
 
-                            {% if product.qrCodeImage is not null %}
+                            {% if item.product.qrCodeImage is not null %}
 
-                                <img src="{{ vich_uploader_asset(product.QrCodeImage, 'imageFile') }}"
-                                     alt="{{ product.name }}">
+                                <img src="{{ vich_uploader_asset(item.product.QrCodeImage, 'imageFile') }}"
+                                     alt="{{ item.product.name }}">
 
                             {% endif %}
                         </div>
 
                     </div>
 
-                {% endfor %}   {% for product in order.products %}
+                {% endfor %}   {% for item in order.productsItems %}
                     <div class="product">
-                        <span>#{{ product.id }} - {{ product.name }}</span>
+                        <span>#{{ item.product.id }} - {{ item.product.name }}</span>
                         <div>
-                            {% if product.image is not null %}
-                                <img src="{{ vich_uploader_asset(product.image, 'imageFile') }}"
-                                     alt="{{ product.name }}">
+                            {% if item.product.image is not null %}
+                                <img src="{{ vich_uploader_asset(item.product.image, 'imageFile') }}"
+                                     alt="{{ item.product.name }}">
 
                             {% endif %}
 
-                            {% if product.qrCodeImage is not null %}
+                            {% if item.product.qrCodeImage is not null %}
 
-                                <img src="{{ vich_uploader_asset(product.QrCodeImage, 'imageFile') }}"
-                                     alt="{{ product.name }}">
+                                <img src="{{ vich_uploader_asset(item.product.QrCodeImage, 'imageFile') }}"
+                                     alt="{{ item.product.name }}">
 
                             {% endif %}
                         </div>
