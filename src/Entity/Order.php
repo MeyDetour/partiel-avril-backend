@@ -26,7 +26,7 @@ class Order
     /**
      * @var Collection<int, ProductInCart>
      */
-    #[ORM\OneToMany(targetEntity: ProductInCart::class, mappedBy: 'orderOfProducItemCart', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: ProductInCart::class, mappedBy: 'orderOfProducItemCart', orphanRemoval: true,cascade: ["persist"])]
     private Collection $productsItems;
 
     public function __construct()
