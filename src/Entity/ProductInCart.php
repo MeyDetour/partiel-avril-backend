@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductInCartRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ProductInCartRepository::class)]
 class ProductInCart
@@ -11,13 +12,16 @@ class ProductInCart
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["order"])]
     private ?int $id = null;
 
     #[ORM\ManyToOne]
+    #[Groups(["order"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product = null;
 
     #[ORM\Column]
+    #[Groups(["order"])]
     private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'productsItems')]

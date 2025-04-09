@@ -26,6 +26,7 @@ class Order
     /**
      * @var Collection<int, ProductInCart>
      */
+    #[Groups(["order"])]
     #[ORM\OneToMany(targetEntity: ProductInCart::class, mappedBy: 'orderOfProducItemCart', orphanRemoval: true,cascade: ["persist"])]
     private Collection $productsItems;
 
