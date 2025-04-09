@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\ProductInCart;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,28 +22,38 @@ final class ApiOrderController extends AbstractController
         $data = json_decode($request->getContent(), true);
         if (!$data) return $this->json(["message" => "no data send", 409]);
 
-        $productsIds = $data['products'];
-        if (count($productsIds) === 0) return $this->json(["message" => "no products", 400]);
+        $productsDATA = $data['products'];
+        if (count($productsDATA) === 0) return $this->json(["message" => "no products", 400]);
 
 
         $order = new Order();
         $order->setOwner($user);
 
-        foreach ($productsIds as $id) {
-            $product = $productRepository->find($id);
-            if (!$product) return $this->json(["message" => "product $id not found", 404]);
-            $order->addProduct($product);
+        foreach ($productsDATA as $productsDATUM) {
+            if (empty($productsDATUM["id"]) || empty($productsDATUM["quantity"])) return $this->json(["message" => "You must provide quantity and id for each product"], 400);
+
+            $product = $productRepository->find($productsDATUM["id"]);
+            if (!$product) return $this->json(["message" => "product " . $productsDATUM["id"] . "not found"] ,404);
+
+            $productItemForCart = new ProductInCart();
+            $productItemForCart->setQuantity($productsDATUM["quantity"]);
+            $productItemForCart->setProduct($product);
+
+            $order->addProductsItem($productItemForCart);
         }
 
         $entityManager->persist($order);
         $entityManager->flush();
 
 
-        return $this->json($order, 200,[], ["groups" => ['order']]);
+        return $this->json($order, 200, [], ["groups" => ['order']]);
     }
+
     #[Route('/history', name: 'order_history', methods: "GET")]
     public function history(Request $request): Response
     {
-        return $this->json($this->getUser()->getOrders(),200,[],['groups'=>['order']]);
+        return $this->json($this->getUser()->getOrders(), 200, [], ['groups' => ['order']]);
     }
+
+
 }

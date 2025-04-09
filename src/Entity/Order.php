@@ -18,21 +18,20 @@ class Order
     #[Groups(["order"])]
     private ?int $id = null;
 
-    /**
-     * @var Collection<int, Product>
-     */
-    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'orders')]
-    #[Groups(["order"])]
-    private Collection $products;
-
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(["order"])]
     private ?User $owner = null;
 
+    /**
+     * @var Collection<int, ProductInCart>
+     */
+    #[ORM\OneToMany(targetEntity: ProductInCart::class, mappedBy: 'orderOfProducItemCart', orphanRemoval: true)]
+    private Collection $productsItems;
+
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->productsItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -40,29 +39,6 @@ class Order
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): static
-    {
-        $this->products->removeElement($product);
-
-        return $this;
-    }
 
     public function getOwner(): ?User
     {
@@ -72,6 +48,36 @@ class Order
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductInCart>
+     */
+    public function getProductsItems(): Collection
+    {
+        return $this->productsItems;
+    }
+
+    public function addProductsItem(ProductInCart $productsItem): static
+    {
+        if (!$this->productsItems->contains($productsItem)) {
+            $this->productsItems->add($productsItem);
+            $productsItem->setOrderOfProducItemCart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductsItem(ProductInCart $productsItem): static
+    {
+        if ($this->productsItems->removeElement($productsItem)) {
+            // set the owning side to null (unless already changed)
+            if ($productsItem->getOrderOfProducItemCart() === $this) {
+                $productsItem->setOrderOfProducItemCart(null);
+            }
+        }
 
         return $this;
     }
