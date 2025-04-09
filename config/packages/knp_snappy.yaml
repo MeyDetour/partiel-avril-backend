@@ -1,5 +1,5 @@
 knp_snappy:
     pdf:
         enabled:    true
-        binary: '%kernel.project_dir%/bin/wkhtmltopdf'
+        binary: '/usr/bin/wkhtmltopdf'
         options:    []
