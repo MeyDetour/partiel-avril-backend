@@ -30,6 +30,10 @@ class Order
     #[ORM\OneToMany(targetEntity: ProductInCart::class, mappedBy: 'orderOfProducItemCart', orphanRemoval: true,cascade: ["persist"])]
     private Collection $productsItems;
 
+    #[ORM\Column]
+    #[Groups(["order"])]
+    private ?\DateTimeImmutable $createdAt = null;
+
     public function __construct()
     {
         $this->productsItems = new ArrayCollection();
@@ -79,6 +83,18 @@ class Order
                 $productsItem->setOrderOfProducItemCart(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

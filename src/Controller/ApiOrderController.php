@@ -27,6 +27,7 @@ final class ApiOrderController extends AbstractController
 
 
         $order = new Order();
+        $order->setCreatedAt(new \DateTimeImmutable());
         $order->setOwner($user);
 
         foreach ($productsDATA as $productsDATUM) {
