@@ -29,9 +29,7 @@
                 </td>
                 <td>
                     <a href="{{ path('app_order', {'id': order.id}) }}">show</a>
-                    {% if "ROLLE_ADMIN" in app.user.roles %}
                     <a href="{{ path('delete_order', {'id': order.id}) }}">delete</a>
-                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
