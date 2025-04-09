@@ -21,12 +21,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/product')]
 final class ProductController extends AbstractController
-{    private ImageService $imageService;
+{
+    private ImageService $imageService;
 
     public function __construct(ImageService $imageService)
     {
         $this->imageService = $imageService;
     }
+
     #[Route(name: 'app_product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
@@ -72,7 +74,7 @@ final class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-             if ($product->getImage()) $product->setImageUrl($this->imageService->getImageUrl($product->getImage(), "product"));
+            if ($product->getImage()) $product->setImageUrl($this->imageService->getImageUrl($product->getImage(), "product"));
             if ($product->getQrCodeImage()) $product->setQrCodeUrl($this->imageService->getImageUrl($product->getQrCodeImage(), "qrcode"));
 
             $entityManager->persist($product);
@@ -116,8 +118,10 @@ final class ProductController extends AbstractController
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->getPayload()->getString('_token'))) {
-         unlink(    $this->getParameter('kernel.project_dir') . '/public/images/qrcodes/' .$product->getQrCodeImage()->getImageName());
-            $entityManager->remove($product);
+         try {
+             unlink($this->getParameter('kernel.project_dir') . '/public/images/qrcodes/' . $product->getQrCodeImage()->getImageName());
+         }catch (e){}
+           $entityManager->remove($product);
             $entityManager->flush();
         }
 
